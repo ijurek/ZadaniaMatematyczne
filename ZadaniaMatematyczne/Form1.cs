@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Xml.Linq;
 using System.Linq;
 using System.Diagnostics;
@@ -63,6 +63,10 @@ namespace ZadaniaMatematyczne
                 textBox1.ForeColor = Color.Black;
                 CorrectAnswers(1);
             }
+            else if (answer == "")
+            {
+                MessageBox.Show("Podaj wynik działania w oknie");
+            }
             else
             {
                 textBox1.ForeColor = Color.Red;
@@ -97,6 +101,15 @@ namespace ZadaniaMatematyczne
         void DisplayAttempts()
         {
             labelOfAttempts.Text = attempts.ToString();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textBox1.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Proszę wprowadzać tylko cyfry");
+                textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
+            }
         }
     }
 }
